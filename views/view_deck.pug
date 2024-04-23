@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+html(lang='en')
+	head
+		title YGO Deck List
+		script(src='/client.js')
+		link(rel="stylesheet" href="/style.css")
+		
+	body
+		include ./nav_bar
+		
+		h2 #{deck.name}
+		
+		div(id='deckSize_counter_view')
+			label(for='total_card_qty') Total Card:
+			|
+			|
+			input(type='text' id='total_card_qty' value=deckSize readonly)
+			
+		div(id='view_deck_content')
+			div(class='user_deck_area')
+				div(class='user_deck_table')
+					table(class='card_area')
+						tr
+							th(class='name_header') Card Name
+							th(class='type_header') Card Type
+							th(class='qty_header') Quantity
+						each card,index in deck
+							tr(class='card_row' id='row_' + index onclick='showHiddenRowElements()')
+								td(class='name_cell') #{card.card_name}
+								td(class='type_cell') #{card.card_type}
+								td(class='qty_cell') #{card.value}
+
+				div(id='favourite_btn')
+					if !isFavourited
+						button(type='button' id='add_favourite_button'  onclick='addToFavouriteList()') Add to Favourite
+						button(type='button' id='remove_favourite_button' onclick='removeFromFavouriteList()' hidden) Remove From Favourite
+					else
+						button(type='button' id='add_favourite_button'  onclick='addToFavouriteList()' hidden) Add to Favourite
+						button(type='button' id='remove_favourite_button' onclick='removeFromFavouriteList()') Remove From Favourite
+						
+			div(id='card_info_area')
+				each card, index in deck
+					div(class='card_info_container' id="card_" + index hidden)
+						p Name: #{card.card_name}
+						p Card Type: #{card.card_type}
+						
+						if card.monster_type
+							p Monster Type: #{card.monster_type}
+							
+						if card.attribute
+							p Attribute: #{card.attribute}
+						
+						if card.level
+							p Level: #{card.level}
+							
+						p Description: #{card.description}
+						
+						if card.attack
+							p Attack: #{card.attack}
+							
+						if card.defense
+							p Defense: #{card.defense}

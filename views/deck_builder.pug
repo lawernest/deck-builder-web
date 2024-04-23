@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+html(lang='en')
+	head
+		title YGO Deck Builder
+		script(src='/client.js')
+		link(rel="stylesheet" href="/style.css")
+		
+	body(onload='hideAddButtonsOnLoad()')
+		include ./nav_bar
+		
+		h1 Deck Builder
+					
+		div(id='build_deck_content')
+			div(class='user_deck_area')
+				label(for='deck_name') Name:
+				|
+				|
+				if deck
+					input(id='deck_name' type='text' value=deck_info.name)
+				else
+					input(id='deck_name' type='text' value='My Deck')
+				br
+				if deck && deck_info.publicity == 0
+					label(for='deck_publicity') Public
+					input(type='radio' id='public_deck' name='deck_publicity' value='public')
+					|
+					|
+					label(for='deck_publicity') Private
+					input(type='radio' id='private_deck' name='deck_publicity' value='private' checked='checked')
+				else
+					label(for='deck_publicity') Public
+					input(type='radio' id='public_deck' name='deck_publicity' value='public' checked='checked')
+					|
+					|
+					label(for='deck_publicity') Private
+					input(type='radio' id='private_deck' name='deck_publicity' value='private')
+				
+				div(id='deckSize_counter_build')
+					label(for='total_card_qty') Total Card:
+					|
+					|
+					if deck
+						input(type='text' id='total_card_qty' value=deckSize readonly)
+					else
+						input(type='text' id='total_card_qty' value='0' readonly)
+				
+				div(class='user_deck_table')
+					table(id='user_deck_list' class='card_area')
+						thead
+							tr
+								th(class='name_header') Card Name
+								th(class='type_header') Card Type
+								th(class='qty_header') Quantity
+						tbody
+							if deck
+								each card in deck
+									tr(class='card_row')
+										td #{card.card_name}
+										td #{card.type}
+										td #{card.value}
+										td
+											button(type='button' id=card.card_name.toLowerCase() onclick='removeFromDeck()') -						
+				button(type='button' id='save_button' onclick='saveDeck()') Save	
+			
+			div(id='card_area_div')
+				div
+					input(id="card_search_box" type="text" placeholder="Card name..")
+					|
+					|
+					button(type='button' onclick='searchCards()') Search
+					br
+					select(name='card_type' id='card_type_select_box' onchange='selectCardType()')
+						option(value='all') All
+						option(value='monster') Monster
+						option(value='spell') Spell
+						option(value='trap') Trap
+					|
+					|
+					select(name='monster_type' id='monster_type_select_box' hidden)
+						option(value='all') All
+						option(value='normal') Normal
+						option(value='effect') Effect
+					|
+					|
+					select(name='spell_type' id='spell_type_select_box' hidden)
+						option(value='all') All
+						option(value='normal') Normal
+						option(value='quick-play') Quick-Play
+						option(value='continuous') Continuous
+						option(value='field') Field
+					|
+					|
+					select(name='trap_type' id='trap_type_select_box' hidden)
+						option(value='all') All
+						option(value='normal') Normal
+						option(value='counter') Counter
+						option(value='continuous') Continuous
+					|
+					|
+					select(name='monster_subtype' id='monster_subtype_select_box' hidden)
+						option(value='all') All
+						option(value='aqua') Aqua
+						option(value='beast') Beast
+						option(value='beast warrior') Beast Warrior
+						option(value='cyberse') Cyberse
+						option(value='dinosaur') Dinosaur
+						option(value='dragon') Dragon
+						option(value='fairy') Fairy
+						option(value='fiend') Fiend
+						option(value='fish') Fish
+						option(value='insect') Insect
+						option(value='machine') machine
+						option(value='plant') plant
+						option(value='psychic') psychic
+						option(value='pyro') pyro
+						option(value='reptile') Reptile
+						option(value='rock') rock
+						option(value='sea serpent') sea serpent
+						option(value='spellcaster') spellcaster
+						option(value='thunder') thunder
+						option(value='warrior') warrior
+						option(value='winged beast') winged beast
+						option(value='wyrm') Wyrm
+						option(value='zombie') Zombie
+					
+				div(class='card_table')
+					table(id='card_list' class='card_area')
+						thead
+							tr
+								th(class='name_header') Card Name
+								th(class='type_header') Card Type
+						tbody
+							each card, index in card_list
+								tr(class="card_row" id="row_" + index onclick='showHiddenRowElements()')
+									td #{card.name}
+									td #{card.card_type}
+									td
+										button(type='button' onClick='addCardToDeck()') Add to deck
+			
+			div(id='card_info_area')
+				each card, index in card_list
+					div(class='card_info_container' id="card_" + index hidden)
+						p Name: #{card.name}
+						p Card Type: #{card.card_type}
+						
+						if card.monster_type
+							p Monster Type: #{card.monster_type}
+							
+						if card.attribute
+							p Attribute: #{card.attribute}
+						
+						if card.level
+							p Level: #{card.level}
+							
+						p Description: #{card.description}
+						
+						if card.attack
+							p Attack: #{card.attack}
+							
+						if card.defense
+							p Defense: #{card.defense}

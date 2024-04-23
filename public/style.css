@@ -1,0 +1,143 @@
+* {
+	box-sizing: border-box;
+}
+
+.main_content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#login_form {
+	margin-top: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+}
+
+#login_form label {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+#login_form input {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+#login_form button {
+	margin-right: 10px;
+}
+
+#login_form_btn {
+	display: inline-block;
+	margin-top: 15px;
+	margin-left: 50px;
+}
+
+#profile_title {
+	text-align: center;
+}
+
+.user_deck_table {
+	overflow-y: auto;
+	height: 500px;
+	border: solid;
+	width: 500px;
+}
+
+.card_area {
+	border-collapse: collapse;
+}
+
+tr {
+	height: 20px;
+}
+
+th {
+	background: white;
+	position: sticky;
+	top: 0;
+}
+
+.card_row {
+	margin: 10px;
+}
+
+.card_row:hover {
+	background-color: lightgrey;
+}
+
+
+.name_header, .type_header {
+	text-align: left;
+}
+
+.name_header {
+	width: 250px;
+}
+
+.type_header {
+	width: 150px;
+}
+
+.qty_header {
+	text-align: right;
+}
+
+.qty_cell {
+	text-align: right;
+	padding-right: 5px;
+}
+
+#favourite_btn {
+	margin-top: 10px;
+}
+
+/* Build Deck page*/
+#build_deck_content, #view_deck_content {
+	display: flex;
+	flex-direction: row;
+}
+
+#card_area_div {
+	margin-left: 20px;
+}
+
+.card_info_container {
+	margin-left: 20px;
+	margin-top: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: solid;
+	width: 400px;
+	height: auto;
+}
+
+.card_table {
+	overflow-y: auto;
+	height: 500px;
+	border: solid;
+	width: 520px;
+}
+
+#save_button {
+	margin-top: 5px;
+}
+
+#deckSize_counter_build {
+	display: inline-block;
+	margin-left: 260px;
+}
+
+#deckSize_counter_view {
+	display: inline-block;
+	margin-left: 390px;
+}
+
+#total_card_qty {
+	border: none;
+	width: 20px;
+	text-align: center;
+}

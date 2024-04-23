@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+html(lang='en')
+	head
+		title YGO Deck List
+		link(rel="stylesheet" href="/style.css")
+		
+	body
+		include ./nav_bar
+		
+		div
+			h1 #{title}
+			
+		div
+			form(id='deck_search_form' action=req_path method='GET')
+				input(type='text' id='deck_search_box' name='keyword' placeholder='keyword..')
+				|
+				|
+				button(type='submit' value='search_button') Search
+				br
+				label(for='by_deck_radioBtn') By Deck:
+				input(type='radio' id='by_deck_radioBtn' name='type' value='deck' checked='checked')
+				|
+				|
+				label(for='by_user_radioBtn') By User:
+				input(type='radio' id='by_user_radioBtn' name='type' value='user')
+		
+		div
+			ul
+				each deck in deck_list
+					li
+						a(href='/deck/view/' + deck.id) #{deck.name}
+						|
+						|
+						span Created By #{deck.creator}

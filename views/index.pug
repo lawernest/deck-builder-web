@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+html(lang='en')
+	head
+		title YGO Deck Builder
+		link(rel="stylesheet" href="/style.css")
+
+	body(id='home_body')
+		div(class="main_content")
+			h1(id="home_title") Welcome to the Yu-Gi-Oh Deck Builder
+			
+		div(class="main_content")
+			form(id="login_form" action="/" method="POST")
+				fieldset
+					i(id='err_msg') #{error_message}
+					br
+					label(for="name_field") Username:
+					input(type='text' name='name_field')
+					br
+					label(for='password_field') Password:
+					input(type='password' name='password_field')
+					br
+					div(id='login_form_btn')
+						button(type='submit' id='signIn_btn' name='form_button' value='login') Sign in
+						button(type='submit' id='register_btn' name='form_button' value='register') Create account
+		script.
+			if(window.history.replaceState) {
+				window.history.replaceState(null, null, window.location.href);
+			}

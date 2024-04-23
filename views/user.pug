@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html(lang='en')
+	head
+		title Profile
+		link(rel="stylesheet" href="/style.css")
+		
+	body
+		include ./nav_bar
+			
+		div
+			h1(id="profile_title") #{username}, Welcome to YGO Builder
+			
+		div
+			h2 Your Decks
+			ul
+				each deck in decks
+					li
+						a(href='/deck/build/' + deck.id) #{deck.name}
